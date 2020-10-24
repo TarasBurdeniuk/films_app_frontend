@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "films_app_frontend",
-    "slug": "films_app_frontend",
+    "name": "films_app",
+    "slug": "films_app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,7 +17,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "web": {
       "favicon": "./assets/favicon.png"

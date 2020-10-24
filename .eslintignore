@@ -1,5 +1,6 @@
 node_modules/**/*
 .expo/*
+.expo-shared/*
 npm-debug.*
 *.jks
 *.p8
@@ -8,7 +9,12 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-.idea/
+web-report/
+.idea
+babel.config.js
 
 # macOS
 .DS_Store
+
+# docs
+docs/**/*
