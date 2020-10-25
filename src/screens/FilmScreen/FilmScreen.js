@@ -90,8 +90,8 @@ const FilmScreen = ({ navigation }) => {
           <Text style={styles.format}>{currentFilm.format}</Text>
           <View>
             <Text style={styles.name}>Stars:</Text>
-            {currentFilm.stars.map((star) => (
-              <Text style={styles.star} key={star}>
+            {currentFilm.stars.map((star, index) => (
+              <Text style={styles.star} key={`${star}_${index.toString()}`}>
                 {star}
               </Text>
             ))}

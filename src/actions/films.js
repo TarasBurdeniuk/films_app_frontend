@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { LOADING_FILMS, ALERT_FILMS, ADD_NEW_FILM, GET_ALL_FILMS, GET_ONE_FILM, DELETE_FILM } from './types';
+import {
+  LOADING_FILMS,
+  ALERT_FILMS,
+  ADD_NEW_FILM,
+  GET_ALL_FILMS,
+  GET_ONE_FILM,
+  DELETE_FILM,
+  CLEAR_ALERT,
+} from './types';
 
 const config = {
   headers: {
@@ -14,11 +22,10 @@ const config = {
  */
 export const addNewFilm = (body) => async (dispatch) => {
   try {
-    const response = await axios.put('http://localhost:5000/api/films', body, config);
+    await axios.put('http://localhost:5000/api/films', body, config);
 
     dispatch({
       type: ADD_NEW_FILM,
-      payload: response.data,
     });
   } catch (err) {
     dispatch({
@@ -90,4 +97,13 @@ export const deleteFilm = (id) => async (dispatch) => {
       payload: err.message,
     });
   }
+};
+
+/**
+ * @description Clear Alert
+ */
+export const clearAlert = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_ALERT,
+  });
 };

@@ -1,4 +1,12 @@
-import { ADD_NEW_FILM, ALERT_FILMS, GET_ALL_FILMS, LOADING_FILMS, GET_ONE_FILM, DELETE_FILM } from '../actions/types';
+import {
+  ADD_NEW_FILM,
+  ALERT_FILMS,
+  GET_ALL_FILMS,
+  LOADING_FILMS,
+  GET_ONE_FILM,
+  DELETE_FILM,
+  CLEAR_ALERT,
+} from '../actions/types';
 
 const initialState = {
   isLoading: false,
@@ -29,7 +37,7 @@ const films = (state = initialState, action) => {
     case ADD_NEW_FILM:
       return {
         ...state,
-        allFilms: [state.allFilms && [...state.allFilms, payload]],
+        alert: 'Film saved',
       };
     case GET_ONE_FILM:
       return {
@@ -41,6 +49,11 @@ const films = (state = initialState, action) => {
       return {
         ...state,
         allFilms: [...state.allFilms.filter((film) => film._id !== payload)],
+      };
+    case CLEAR_ALERT:
+      return {
+        ...state,
+        alert: '',
       };
     default:
       return state;
