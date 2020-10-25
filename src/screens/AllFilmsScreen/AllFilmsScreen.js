@@ -2,7 +2,7 @@ import React from 'react';
 import { View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../components/ui/Loader';
-import FilmItem from './FilmItem';
+import FilmItem from '../../components/FilmItem';
 import { getFilmById } from '../../actions/films';
 
 const styles = StyleSheet.create({

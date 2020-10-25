@@ -6,6 +6,7 @@ import {
   GET_ONE_FILM,
   DELETE_FILM,
   CLEAR_ALERT,
+  SEARCH_FILMS,
 } from '../actions/types';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   alert: '',
   allFilms: null,
   currentFilm: null,
+  searchedFilms: null,
 };
 
 const films = (state = initialState, action) => {
@@ -49,11 +51,18 @@ const films = (state = initialState, action) => {
       return {
         ...state,
         allFilms: [...state.allFilms.filter((film) => film._id !== payload)],
+        searchedFilms: [...state.searchedFilms.filter((film) => film._id !== payload)],
       };
     case CLEAR_ALERT:
       return {
         ...state,
         alert: '',
+      };
+    case SEARCH_FILMS:
+      return {
+        ...state,
+        searchedFilms: payload,
+        isLoading: false,
       };
     default:
       return state;

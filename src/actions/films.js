@@ -7,6 +7,7 @@ import {
   GET_ONE_FILM,
   DELETE_FILM,
   CLEAR_ALERT,
+  SEARCH_FILMS,
 } from './types';
 
 const config = {
@@ -106,4 +107,28 @@ export const clearAlert = () => (dispatch) => {
   dispatch({
     type: CLEAR_ALERT,
   });
+};
+
+/**
+ * @description Search film by star and/or title
+ * @param {object} body - title and star
+ * @return list of searched films
+ */
+export const searchFilm = (body) => async (dispatch) => {
+  dispatch({
+    type: LOADING_FILMS,
+  });
+  try {
+    const response = await axios.post('http://localhost:5000/api/films', body, config);
+
+    dispatch({
+      type: SEARCH_FILMS,
+      payload: response.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: ALERT_FILMS,
+      payload: err.message,
+    });
+  }
 };

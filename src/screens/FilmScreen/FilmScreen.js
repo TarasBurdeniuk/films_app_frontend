@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    color: '#123ee2',
+    color: '#000',
+    fontWeight: '600',
   },
   delete: {
     backgroundColor: 'red',
