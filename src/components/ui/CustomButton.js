@@ -34,12 +34,16 @@ const styles = StyleSheet.create({
  * @return {JSXElement}
  */
 const CustomButton = ({ children, onPress, style, disabled, onLongPress }) => {
-  const Wrapper = TouchableOpacity;
-
   return (
-    <Wrapper disabled={disabled} style={styles.wrapper} onPress={onPress} onLongPress={onLongPress} activeOpacity={0.7}>
+    <TouchableOpacity
+      disabled={disabled}
+      style={styles.wrapper}
+      onPress={onPress}
+      onLongPress={onLongPress}
+      activeOpacity={0.7}
+    >
       <View style={[styles.button, { ...style }]}>{children}</View>
-    </Wrapper>
+    </TouchableOpacity>
   );
 };
 

@@ -1,8 +1,10 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomButton from '../../components/ui/CustomButton';
 import TextBoldBigWhite from '../../components/ui/TextBoldBigWhite';
+import { getAllFilms } from '../../actions/films';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,6 +25,8 @@ const styles = StyleSheet.create({
  * @return {JSXElement}
  */
 const MainScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   const handleToAddFilm = () => {
     navigation.navigate('AddFilmScreen');
   };
@@ -32,6 +36,7 @@ const MainScreen = ({ navigation }) => {
   };
 
   const handleToAllFilms = () => {
+    dispatch(getAllFilms());
     navigation.navigate('AllFilmsScreen');
   };
 
