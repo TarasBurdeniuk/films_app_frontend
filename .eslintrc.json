@@ -63,7 +63,8 @@
       {
         "allow": ["warn", "error"]
       }
-    ]
+    ],
+    "react/display-name": "off"
   },
   "globals": {
     "fetch": false
