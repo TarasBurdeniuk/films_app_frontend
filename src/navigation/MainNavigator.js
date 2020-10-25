@@ -32,7 +32,7 @@ const MainNavigator = createStackNavigator(
       headerTintColor: '#000',
       headerRight: () => (
         <TouchableOpacity onPress={() => navigation.navigate('MainScreen')}>
-          <Icon style={{ marginRight: 30 }} name='home' size={30} color='#fff' />
+          <Icon style={{ marginRight: 30 }} name='home' size={30} color='#000' />
         </TouchableOpacity>
       ),
       headerLeft: () => (
@@ -45,7 +45,7 @@ const MainNavigator = createStackNavigator(
           }}
           onPress={() => navigation.goBack()}
         >
-          <Icon name='caret-left' size={40} color='#fff' />
+          <Icon name='caret-left' size={40} color='#000' />
         </TouchableOpacity>
       ),
     }),

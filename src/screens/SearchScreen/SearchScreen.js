@@ -1,9 +1,9 @@
 import React from 'react';
-import { Text, View } from 'react-native-web';
+import { Text, View } from 'react-native';
 
 /**
  * @description Screen representing form for searching film by title and star, and list of searched film
- * @return {JSX.Element}
+ * @return {JSXElement}
  */
 const SearchScreen = () => {
   return (

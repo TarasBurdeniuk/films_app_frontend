@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text } from 'react-native-web';
+import { View, Text } from 'react-native';
 
 /**
  * @description Screen representing one film
- * @return {JSX.Element}
+ * @return {JSXElement}
  */
 const FilmScreen = () => {
   return (
