@@ -14,7 +14,7 @@ const initialState = {
   alert: '',
   allFilms: null,
   currentFilm: null,
-  searchedFilms: null,
+  searchedFilms: [],
 };
 
 const films = (state = initialState, action) => {
