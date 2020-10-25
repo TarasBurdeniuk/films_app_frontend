@@ -10,6 +10,8 @@ import {
   SEARCH_FILMS,
 } from './types';
 
+const url = 'https://films-app-show.herokuapp.com';
+
 const config = {
   headers: {
     'Content-type': 'application/json',
@@ -23,7 +25,7 @@ const config = {
  */
 export const addNewFilm = (body) => async (dispatch) => {
   try {
-    await axios.put('http://localhost:5000/api/films', body, config);
+    await axios.put(`${url}/api/films`, body, config);
 
     dispatch({
       type: ADD_NEW_FILM,
@@ -45,7 +47,7 @@ export const getAllFilms = () => async (dispatch) => {
     type: LOADING_FILMS,
   });
   try {
-    const response = await axios.get('http://localhost:5000/api/films', config);
+    const response = await axios.get(`${url}/api/films`, config);
     dispatch({
       type: GET_ALL_FILMS,
       payload: response.data,
@@ -68,7 +70,7 @@ export const getFilmById = (id) => async (dispatch) => {
     type: LOADING_FILMS,
   });
   try {
-    const response = await axios.get(`http://localhost:5000/api/films/${id}`, config);
+    const response = await axios.get(`${url}/api/films/${id}`, config);
     dispatch({
       type: GET_ONE_FILM,
       payload: response.data,
@@ -87,7 +89,7 @@ export const getFilmById = (id) => async (dispatch) => {
  */
 export const deleteFilm = (id) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:5000/api/films?id=${id}`, config);
+    await axios.delete(`${url}/api/films?id=${id}`, config);
     dispatch({
       type: DELETE_FILM,
       payload: id,
@@ -119,7 +121,7 @@ export const searchFilm = (body) => async (dispatch) => {
     type: LOADING_FILMS,
   });
   try {
-    const response = await axios.post('http://localhost:5000/api/films', body, config);
+    const response = await axios.post(`${url}/api/films`, body, config);
 
     dispatch({
       type: SEARCH_FILMS,
