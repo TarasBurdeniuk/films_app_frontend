@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOADING_FILMS, ALERT_FILMS, ADD_NEW_FILM, GET_ALL_FILMS, GET_ONE_FILM } from './types';
+import { LOADING_FILMS, ALERT_FILMS, ADD_NEW_FILM, GET_ALL_FILMS, GET_ONE_FILM, DELETE_FILM } from './types';
 
 const config = {
   headers: {
@@ -64,6 +64,25 @@ export const getFilmById = (id) => async (dispatch) => {
     dispatch({
       type: GET_ONE_FILM,
       payload: response.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: ALERT_FILMS,
+      payload: err.message,
+    });
+  }
+};
+
+/**
+ * @description Delete film by id
+ * @param {string} id - id of film
+ */
+export const deleteFilm = (id) => async (dispatch) => {
+  try {
+    await axios.delete(`http://localhost:5000/api/films?id=${id}`, config);
+    dispatch({
+      type: DELETE_FILM,
+      payload: id,
     });
   } catch (err) {
     dispatch({
