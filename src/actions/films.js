@@ -1,5 +1,14 @@
 import axios from 'axios';
-import { LOADING_FILMS, ALERT_FILMS, ADD_NEW_FILM, GET_ALL_FILMS, GET_ONE_FILM, DELETE_FILM } from './types';
+import {
+  LOADING_FILMS,
+  ALERT_FILMS,
+  ADD_NEW_FILM,
+  GET_ALL_FILMS,
+  GET_ONE_FILM,
+  DELETE_FILM,
+  CLEAR_ALERT,
+  SEARCH_FILMS,
+} from './types';
 
 const config = {
   headers: {
@@ -14,11 +23,10 @@ const config = {
  */
 export const addNewFilm = (body) => async (dispatch) => {
   try {
-    const response = await axios.put('http://localhost:5000/api/films', body, config);
+    await axios.put('http://localhost:5000/api/films', body, config);
 
     dispatch({
       type: ADD_NEW_FILM,
-      payload: response.data,
     });
   } catch (err) {
     dispatch({
@@ -83,6 +91,39 @@ export const deleteFilm = (id) => async (dispatch) => {
     dispatch({
       type: DELETE_FILM,
       payload: id,
+    });
+  } catch (err) {
+    dispatch({
+      type: ALERT_FILMS,
+      payload: err.message,
+    });
+  }
+};
+
+/**
+ * @description Clear Alert
+ */
+export const clearAlert = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_ALERT,
+  });
+};
+
+/**
+ * @description Search film by star and/or title
+ * @param {object} body - title and star
+ * @return list of searched films
+ */
+export const searchFilm = (body) => async (dispatch) => {
+  dispatch({
+    type: LOADING_FILMS,
+  });
+  try {
+    const response = await axios.post('http://localhost:5000/api/films', body, config);
+
+    dispatch({
+      type: SEARCH_FILMS,
+      payload: response.data,
     });
   } catch (err) {
     dispatch({

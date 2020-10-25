@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    color: '#123ee2',
+    color: '#000',
+    fontWeight: '600',
   },
   delete: {
     backgroundColor: 'red',
@@ -90,8 +91,8 @@ const FilmScreen = ({ navigation }) => {
           <Text style={styles.format}>{currentFilm.format}</Text>
           <View>
             <Text style={styles.name}>Stars:</Text>
-            {currentFilm.stars.map((star) => (
-              <Text style={styles.star} key={star}>
+            {currentFilm.stars.map((star, index) => (
+              <Text style={styles.star} key={`${star}_${index.toString()}`}>
                 {star}
               </Text>
             ))}
