@@ -10,7 +10,8 @@ import {
   SEARCH_FILMS,
 } from './types';
 
-const url = 'https://films-app-show.herokuapp.com';
+// const url = 'https://films-app-show.herokuapp.com';
+const url = 'http://localhost:5000';
 
 const config = {
   headers: {
