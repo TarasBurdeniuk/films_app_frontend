@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import RNPickerSelect from 'react-native-picker-select';
 import { View, Text, SafeAreaView, StyleSheet, ScrollView, TextInput, Button, Alert } from 'react-native';
 import { addNewFilm, clearAlert } from '../../actions/films';
 
@@ -20,6 +21,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
   },
+  alert: {
+    marginLeft: 30,
+    color: 'red',
+  },
 });
 
 /**
@@ -33,6 +38,13 @@ const AddFilmScreen = () => {
     release: '',
     stars: '',
   });
+  const [format] = useState([
+    { label: 'DVD', value: 'DVD' },
+    { label: 'VHS', value: 'VHS' },
+    { label: 'Blu-Ray', value: 'Blu-Ray' },
+  ]);
+  const refFormat = useRef();
+
   const [disabled, setDisabled] = useState(true);
   const { alert } = useSelector((state) => state.films);
   const dispatch = useDispatch();
@@ -46,6 +58,19 @@ const AddFilmScreen = () => {
       setDisabled(true);
     }
   }, [value]);
+
+  const showAlert = (alertText) => {
+    Alert.alert(
+      `New Film`,
+      `${alertText}`,
+      [
+        {
+          text: 'Ok',
+        },
+      ],
+      { cancelable: false },
+    );
+  };
 
   const clearValue = () => {
     dispatch(clearAlert());
@@ -76,6 +101,11 @@ const AddFilmScreen = () => {
   };
 
   const handleSave = () => {
+    const validRelease = Number(value.release) >= 1850 && Number(value.release) <= 2020;
+    if (!validRelease) {
+      showAlert('Not valid release');
+      return;
+    }
     dispatch(
       addNewFilm({
         ...value,
@@ -83,9 +113,10 @@ const AddFilmScreen = () => {
         release: Number(value.release),
       }),
     );
+    refFormat.current.inputRef.clear();
   };
 
-  const { title, format, release, stars } = value;
+  const { title, release, stars } = value;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -99,14 +130,12 @@ const AddFilmScreen = () => {
             maxLength={200}
           />
         </View>
+
         <View>
           <Text style={styles.name}>Format:</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => handleOnChange(text, 'format')}
-            value={format}
-            maxLength={10}
-          />
+          <View style={styles.input}>
+            <RNPickerSelect ref={refFormat} onValueChange={(text) => handleOnChange(text, 'format')} items={format} />
+          </View>
         </View>
         <View>
           <Text style={styles.name}>Release:</Text>
@@ -117,6 +146,7 @@ const AddFilmScreen = () => {
             value={release}
             maxLength={4}
           />
+          <Text style={styles.alert}>from 1850 to 2020</Text>
         </View>
         <View>
           <Text style={styles.name}>Stars:</Text>
